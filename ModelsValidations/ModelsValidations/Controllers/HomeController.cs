@@ -20,11 +20,31 @@ namespace ModelsValidations.Controllers
 
         public IActionResult Index()
         {
+            var filme = new Filme
+            {
+                Id = 1,
+                Titulo = "Teste",
+                Valor = 1000,
+                Avaliacao = 10,
+                DataLancamento = DateTime.Now,
+                Genero = "masculino"
+            };
+            return RedirectToAction("Privacy", filme);
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy( Filme filme)
         {
+            if (ModelState.IsValid)
+            {
+           
+            }
+
+            foreach (var item in ModelState.Values.SelectMany(erro=> erro.Errors))//pegando os erros da model state
+            {
+                _logger.LogError(item.ErrorMessage);
+            }
+
             return View();
         }
 
