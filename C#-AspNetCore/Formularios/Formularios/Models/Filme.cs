@@ -45,6 +45,7 @@ namespace Formularios.Models
 
         [RegularExpression(@"^[0-5]*$", ErrorMessage ="Numeros somente de 1 a 5.")]
         [DisplayName("Avaliação")]
+        [Required(ErrorMessage = "Preencha o campo avaliação")]
         public int Avaliacao { get; set; }
     }
 }
