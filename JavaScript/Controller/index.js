@@ -9,22 +9,31 @@ var admin = document.querySelector("#exempleInputAdmin");
 */
 
 var fields = document.querySelectorAll("#form-user-create [name]");
-var user ={};
+var user = {};
 
-//pegando todos os dados do formulario com foreach
-fields.forEach(function (field, index) {
-  if (field.name == "gender" && field.checked == true) {
-    //como o genero tem 22 campos é necessario ver qual esta checado
-    //console.log(field.id, "sim");
-
-    user[field.name] = field.value;
-
-
-  }else{
-
-    user[field.name] = field.value;
-  }
- 
+//console.log(user);
+//trabalhando com eventos de botao
+document.querySelectorAll("button").forEach(function () {
+  this.addEventListener("click", function () {
+    //console.log("clicouu rrr");
+    //pegando todos os dados do formulario com foreach
+    fields.forEach(function (field, index) {
+      if (field.name == "gender") {
+        //como o genero tem 22 campos é necessario ver qual esta checado
+        //console.log(field.id, "sim");
+        if (field.checked) user[field.name] = field.value;
+      } else {
+        user[field.name] = field.value;
+      }
+    });
+  });
 });
 
-console.log(user)
+document
+  .getElementById("form-user-create")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();//cancela o comportamennto padrao do formaulario, pois a primera vez que 
+    //for chamado o mesmo esta vazio
+
+    console.log(user);
+  });
