@@ -40,6 +40,7 @@
                   <!--v-model serve para passar o dado para o metodo addPrefix 
                   v-on:keyup é o evento de teclado enter
                   -->
+                  <!--Criando o imput para adicionar o prefix-->
                   <input class="form-control" type="text" v-model="prefix" v-on:keyup.enter="addPrefix(prefix)"
                     placeholder="Digite o prefixo" />
                   <div class="input-group-append">
@@ -79,7 +80,7 @@
 
 
 
-
+<!--Criando o imput para adicionar o sufixo-->
                 <div class="input-group">
                   <input class="form-control" type="text" v-model="sufix" v-on:keyup.enter="addSufix(sufix)"
                     placeholder="Digite o Sufixo" />
