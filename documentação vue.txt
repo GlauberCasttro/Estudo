@@ -1,0 +1,25 @@
+documentação para criação de projetos vue
+1- instalar o CLI do vue
+    a-npm install -g @vue/cli "Para instalar"
+2-criar o projeto vue
+vue create . "para criar, e o nome da pasta que esta sendo criada nao pode conter letras maiusculas'"
+instalar dependencia de projeto 
+npm install bootstrap --save
+npm install font-awesome --save
+iniciar o servidor npm run server
+
+https://www.linkedin.com/pulse/todos-os-atalhos-do-vs-code-mateus-barbosa/
+
+
+
+<!--ferramentas para ajudar a padronizar a escrita do coddigo-->
+ "lint": "vue-cli-service lint --no-fix" ajustar no package.json
+  npm run lint para rodar o lint para verificar o codigo
+
+
+  define regras para o lint
+   "rules": {
+      "quotes": ["error", "double"],
+      "indent": ["error", "tab"],
+      "semi": ["error", "always"]
+    }
