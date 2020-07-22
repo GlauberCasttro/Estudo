@@ -29,11 +29,11 @@
                   <li class="list-group-item d-flex justify-content-between align-items-center"
                     v-for="(prefix,index) in prefixes" v-bind:key="prefix">
                     {{ prefix }}
-                      <button class="btn btn-danger" title="Remova" v-on:click="removePrefix(index)">
-                    <span class="fa fa-trash"></span>
-                  </button>
+                    <button class="btn btn-danger" title="Remova" v-on:click="removePrefix(index)">
+                      <span class="fa fa-trash"></span>
+                    </button>
                   </li>
-                
+
                 </ul>
                 <br />
                 <div class="input-group">
@@ -49,7 +49,15 @@
                     </button>
 
                   </div>
+          
                 </div>
+                <br/>
+                <div class="form-group">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-info btn-sm btn-block" v-on:click="RemoverTodosPrefixos()">Limpar Prefixos</button>
+                  </div>
+                </div>
+                
               </div>
             </div>
           </div>
@@ -67,8 +75,7 @@
 
                   <!--Lista os dados do array de prefixes-->
                   <li class="list-group-item d-flex justify-content-between align-items-center"
-                   v-for="(sufix, index) in sufixes"
-                    v-bind:key="sufix">
+                    v-for="(sufix, index) in sufixes" v-bind:key="sufix">
                     {{ sufix }}
                     <button class="btn btn-danger" title="Remova" v-on:click="removeSufix(index)">
                       <span class="fa fa-trash"></span>
@@ -80,7 +87,7 @@
 
 
 
-<!--Criando o imput para adicionar o sufixo-->
+                <!--Criando o imput para adicionar o sufixo-->
                 <div class="input-group">
                   <input class="form-control" type="text" v-model="sufix" v-on:keyup.enter="addSufix(sufix)"
                     placeholder="Digite o Sufixo" />
@@ -90,19 +97,36 @@
                     </button>
                   </div>
                 </div>
-
+                <br/>
+                <div class="form-group">
+                  <div class="input-group-append">
+                    <button type="button" class="btn btn-info btn-sm btn-block" v-on:click="RemoverTodosSufixos()">Limpar Sufixos</button>
+                  </div>
+                </div>
+                
 
               </div>
             </div>
           </div>
         </div>
         <br />
-        <h5 class="text-center">Domains</h5>
+        <h5 class="text-center">Domains <span class="badge badge-info">{{domains.length}}</span></h5>
         <div class="card">
           <div class="card-body">
             <ul class="list-group">
               <li class="list-group-item" v-for="domain in domains" v-bind:key="domain.name">
-                {{ domain }}
+                <div class="row">
+                  <div class="col-md">
+                    {{ domain.name }} 
+                  </div>
+                  <div class="col-md text-right">
+                    <!--v:bind serve para tratar atributos html-->
+                    <a class="btn btn-info" v-bind:href="domain.checkout" target="_blank"> 
+                      <span class="fa fa-shopping-cart"> Testar Registro</span>
+                    </a>
+                  </div>
+                </div>
+
               </li>
             </ul>
           </div>
@@ -122,39 +146,57 @@
       return {
         prefix: "",
         sufix: "",
-        prefixes: [],
-        sufixes: [],
-        domains: [],
+        prefixes: ['a', 'b', 'c'],
+        sufixes: ['c', 'd', 'e']
+        //domains: [],
       };
     },
     methods: {
       addPrefix(prefix) {
         if (prefix != "")
           this.prefixes.push(prefix);
-        this.generateDomains();
+        // this.generateDomains();
         this.prefix = "";
       },
       addSufix(sufix) {
         if (sufix != "")
           this.sufixes.push(sufix);
-        this.generateDomains();
+        // this.generateDomains();
         this.sufix = ""
+
+
+
+      }, removePrefix(index) {
+        this.prefixes.splice(index, 1);
+        // this.generateDomains();
       },
-      generateDomains() {
-        this.domains = [];
+      RemoverTodosPrefixos(){
+        this.prefixes = [];
+      },
+      removeSufix(index) {
+        this.sufixes.splice(index, 1);
+        //this.generateDomains();
+      },
+      RemoverTodosSufixos(){
+        this.sufixes = [];
+      }
+    }, computed: {
+
+      domains() {
+        console.log('genererating domains...')
+        const domains = [];
         for (let prefix of this.prefixes) {
           for (let sufix of this.sufixes) {
-            this.domains.push(prefix + sufix);
+            const name = prefix+sufix;
+            const url = name.toLowerCase();
+            
+            const checkout = `https://checkout.hostgator.com.br/?a=add&sld=${url}&tld=.com`;
+            domains.push({
+              name, checkout
+            });
           }
         }
-
-      },removePrefix(index){
-       this.prefixes.splice(index,1);
-      this.generateDomains();
-      },
-      removeSufix(index){
-        this.sufixes.splice(index,1);
-      this.generateDomains();
+        return domains;
       }
     }
   };
