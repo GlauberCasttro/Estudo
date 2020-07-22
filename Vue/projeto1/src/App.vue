@@ -47,9 +47,7 @@
                     <button class="btn btn-info" v-on:click="addPrefix(prefix)">
                       <span class="fa fa-plus"></span>
                     </button>
-
                   </div>
-          
                 </div>
                 <br/>
                 <div class="form-group">
@@ -81,7 +79,6 @@
                       <span class="fa fa-trash"></span>
                     </button>
                   </li>
-
                 </ul>
                 <br />
 
