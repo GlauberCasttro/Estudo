@@ -5,11 +5,11 @@ using AuthAutho.Areas.Identity.Data;
 
 namespace AuthAutho.Controllers
 {
-    public class LogsController : Controller
+    public class LogsKissController : Controller
     {
         private readonly ILogger  _logger;
         private readonly UserManager<ApplicationUser> _user;
-        public LogsController(ILogger logger, UserManager<ApplicationUser> user)
+        public LogsKissController(ILogger logger, UserManager<ApplicationUser> user)
         {
             _user = user;
             _logger = logger;
